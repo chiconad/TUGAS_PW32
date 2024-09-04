@@ -25,7 +25,7 @@ $result = $conn->query($sql);
     <title>Data Kontak</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body background = "bg-pw.jpeg">
     <h2>Data Kontak yang Dimasukkan</h2>
 
     <table border="1" cellpadding="10" cellspacing="0">
