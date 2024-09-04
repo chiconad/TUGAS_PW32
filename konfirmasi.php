@@ -30,7 +30,7 @@ $result = $conn->query($sql);
 
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
-            <th>ID</th>
+            <th>No</th>
             <th>Nama</th>
             <th>Email</th>
             <th>Tanggal Lahir</th>
@@ -43,10 +43,11 @@ $result = $conn->query($sql);
         
         <?php
         if ($result->num_rows > 0) {
-            // Output data dari setiap row
+            $no = 1;
+
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                echo "<td>" . $no++ . "</td>"; 
                 echo "<td>" . htmlspecialchars($row['nama']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['tanggal_lahir']) . "</td>";
