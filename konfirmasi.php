@@ -30,7 +30,7 @@ $saran = $_GET['saran'];
     <p><strong>Saran:</strong> <?php echo htmlspecialchars($saran); ?></p>
 
     <footer>
-        <p>&copy; 2024 Formulir Kontak. All rights reserved.</p>
+        <p>&copy; Nadila Yanuarika Rimawati | 233140701111028</p>
     </footer>
 </body>
 </html>
