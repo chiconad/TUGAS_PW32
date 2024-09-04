@@ -1,13 +1,20 @@
 <?php
-// Ambil data dari URL
-$nama = $_GET['nama'];
-$email = $_GET['email'];
-$tanggal_lahir = $_GET['tanggal_lahir'];
-$umur = $_GET['umur'];
-$jenis_kelamin = $_GET['jenis_kelamin'];
-$agama = $_GET['agama'];
-$no_telepon = $_GET['no_telepon'];
-$saran = $_GET['saran'];
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "form_regist"; 
+
+// Buat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Periksa koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// SQL untuk mengambil semua data
+$sql = "SELECT * FROM form";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -15,22 +22,53 @@ $saran = $_GET['saran'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konfirmasi Data</title>
+    <title>Data Kontak</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Konfirmasi Data yang Anda Masukkan</h2>
-    <p><strong>Nama:</strong> <?php echo htmlspecialchars($nama); ?></p>
-    <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
-    <p><strong>Tanggal Lahir:</strong> <?php echo htmlspecialchars($tanggal_lahir); ?></p>
-    <p><strong>Umur:</strong> <?php echo htmlspecialchars($umur); ?></p>
-    <p><strong>Jenis Kelamin:</strong> <?php echo htmlspecialchars($jenis_kelamin); ?></p>
-    <p><strong>Agama:</strong> <?php echo htmlspecialchars($agama); ?></p>
-    <p><strong>No Telepon:</strong> <?php echo htmlspecialchars($no_telepon); ?></p>
-    <p><strong>Saran:</strong> <?php echo htmlspecialchars($saran); ?></p>
+    <h2>Data Kontak yang Dimasukkan</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Tanggal Lahir</th>
+            <th>Umur</th>
+            <th>Jenis Kelamin</th>
+            <th>Agama</th>
+            <th>No Telepon</th>
+            <th>Saran</th>
+        </tr>
+        
+        <?php
+        if ($result->num_rows > 0) {
+            // Output data dari setiap row
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['nama']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['tanggal_lahir']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['umur']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['jenis_kelamin']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['agama']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['no_telepon']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['saran']) . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='10'>Tidak ada data yang tersedia.</td></tr>";
+        }
+        ?>
+    </table>
 
     <footer>
         <p>&copy; Nadila Yanuarika Rimawati | 233140701111028</p>
     </footer>
 </body>
 </html>
+
+<?php
+$conn->close();
+?>
